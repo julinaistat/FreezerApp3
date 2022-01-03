@@ -1,5 +1,6 @@
 package com.example.freezerapp3;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.*;
 import java.sql.Date;
@@ -31,7 +32,7 @@ public class FreezerApp3Application implements CommandLineRunner {
 
         SpringApplication.run(FreezerApp3Application.class, args);
 
-        cookedFood milanesaDePollo = new cookedFood("Milanesas", 0.500, KG, LocalDate.of(2000,10,10));
+        cookedFood milanesaDePollo = new cookedFood("Milanesas", 0.500, null, null);
         cookedFood sopaParaguaya = new cookedFood("Sopa Paraguaya");
         rawFood palmitos = new rawFood("Palmitos");
         //System.out.println(milanesaDePollo);
@@ -67,7 +68,7 @@ public class FreezerApp3Application implements CommandLineRunner {
         logger.info("Meal cheese -> {}", dao.findByName("Cheese") );
         logger.info("Delete Hot Dogs -> No of rows deleted - {}", dao.deleteByName("Hot Dogs") );
         // HELP WITH INSERT: It asks for a string but the constructor says it's an enum
-        logger.info("Inserting Steak -> {}", dao.insert(new Food("Steak", 677, null,null)));
+        logger.info("Inserting Steak -> {}", dao.insert(new Food("Steak", 1.5, KG, null)));
         logger.info("Insert new -> {}", dao.insert(new cookedFood("Sopa Paraguaya")));
         logger.info("Meal Steak -> {}", dao.findByName("Steak") );
         logger.info("All food -> {}", dao.findAll() );

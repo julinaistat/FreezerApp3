@@ -8,7 +8,7 @@ package com.example.freezerapp3.entity;
 
 //make it abstract as soon as you can
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 public class Food {
 
@@ -16,7 +16,7 @@ public class Food {
     private String name;
     private double weight;
     private Unit unitOfMeasure;
-    private LocalDate dateOfStorage;
+    private Timestamp dateOfStorage;
 
     public String getName() {
         return name;
@@ -34,28 +34,29 @@ public class Food {
         this.weight = weight;
     }
 
-    public Unit getUnitOfMeasure() {
-        return unitOfMeasure;
+    public String getUnitOfMeasure() {
+        return String.valueOf(unitOfMeasure);
     }
 
-    public void setUnitOfMeasure(Unit unitOfMeasure) {
-        this.unitOfMeasure = unitOfMeasure;
+    public void setUnitOfMeasure(String unitOfMeasure) {
+        unitOfMeasure = unitOfMeasure.toString();
     }
 
-    public LocalDate getDateOfStorage() {
+    public Timestamp getDateOfStorage() {
         return dateOfStorage;
     }
 
-    public void setDateOfStorage(LocalDate dateOfStorage) {
+    public void setDateOfStorage(Timestamp dateOfStorage) {
         this.dateOfStorage = dateOfStorage;
     }
 
-    public Food(String name, double weight, Unit unitOfMeasure, LocalDate dateOfStorage) {
+    public Food(String name, double weight, Unit unitOfMeasure, Timestamp dateOfStorage) {
         this.name = name;
         this.weight = weight;
         this.unitOfMeasure = unitOfMeasure;
         this.dateOfStorage = dateOfStorage;
     }
+
 
     public Food(String name) {
         this.name = name;
@@ -84,4 +85,6 @@ public class Food {
     public String toString(){
         return "There's " + weight + " " + unitOfMeasure + " of " + name + " since " + dateOfStorage;
     }
+
+
 }

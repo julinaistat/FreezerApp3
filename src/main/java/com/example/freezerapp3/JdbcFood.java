@@ -1,11 +1,16 @@
 package com.example.freezerapp3;
 
 import com.example.freezerapp3.entity.Food;
+import com.example.freezerapp3.entity.Unit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.SQL;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,9 +21,26 @@ public class JdbcFood {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    // We can create a custom RowMapper
+    class FoodRowMapper implements RowMapper<Food>{
+        @Override
+        public  Food mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Food food = new Food();
+            food.setName(rs.getString("name"));
+            food.setWeight(rs.getDouble("weight"));
+            food.setUnitOfMeasure(rs.getString("unit_of_measure"));
+            //food.setUnitOfMeasure(Unit.valueOf(rs.getString("unit_of_measure")));
+            food.setDateOfStorage(rs.getTimestamp("date_of_storage"));
+            return food;
+        }
+
+    }
+
+
     public List<Food> findAll(){
         return jdbcTemplate.query("select * from food",
-                new BeanPropertyRowMapper<Food>(Food.class));
+                //new BeanPropertyRowMapper<Food>(Food.class));
+                new FoodRowMapper());
     };
 
     public Food findByName(String name){

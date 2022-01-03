@@ -1,12 +1,12 @@
 package com.example.freezerapp3.entity;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 public class cookedFood extends Food {
     // Add cooked food attributes
 
 
-    public cookedFood(String name, double weight, Unit unitOfMeasure, LocalDate dateOfStorage) {
+    public cookedFood(String name, double weight, Unit unitOfMeasure, Timestamp dateOfStorage) {
         super(name, weight, unitOfMeasure, dateOfStorage);
     }
 
